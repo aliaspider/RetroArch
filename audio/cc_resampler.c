@@ -105,7 +105,7 @@ static void resampler_CC_process(void *re_, struct resampler_data *data)
                : "r"(inp));
 
          inp++;
-         if (inp == inp_max)
+         if (inp >= inp_max)
             goto done;
       }
       __asm__ (

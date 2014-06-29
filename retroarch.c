@@ -3116,7 +3116,13 @@ bool rarch_main_iterate(void)
    }
 
    update_frame_time();
+   RARCH_PERFORMANCE_INIT(retro_run_func);
+   RARCH_PERFORMANCE_START(retro_run_func);
+
    pretro_run();
+
+   RARCH_PERFORMANCE_STOP(retro_run_func);
+
    limit_frame_time();
 
    for (i = 0; i < MAX_PLAYERS; i++)

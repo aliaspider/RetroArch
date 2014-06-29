@@ -136,8 +136,11 @@ void retro_perf_log(void)
    log_counters(perf_counters_libretro, perf_ptr_libretro);
 }
 
+retro_time_t rarch_get_time_usec(void);
+
 retro_perf_tick_t rarch_get_perf_counter(void)
 {
+//   return (uint64_t)rarch_get_time_usec();
    retro_perf_tick_t time = 0;
 #if defined(__linux__) || defined(__QNX__)
    struct timespec tv;

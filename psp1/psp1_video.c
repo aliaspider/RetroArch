@@ -187,7 +187,11 @@ static void *psp_init(const video_info_t *video,
       psp->draw_buffer = SCEGU_VRAM_BP_0;
       psp->bpp_log2 = 1;
 
-      pixel_format = GU_PSM_5650;
+//      pixel_format = GU_PSM_5650;
+//      pixel_format = GU_PSM_5551;
+      pixel_format = (g_extern.system.pix_fmt == RETRO_PIXEL_FORMAT_0RGB1555)? GU_PSM_5551 : GU_PSM_5650 ;
+      printf("\n\n\n\n\n\n\n\n(g_extern.system.pix_fmt == RETRO_PIXEL_FORMAT_0RGB1555) : %s\n\n\n\n\n\n\n\n",(g_extern.system.pix_fmt == RETRO_PIXEL_FORMAT_0RGB1555)?"true":"false");
+      fflush(stdout);
       lut_pixel_format = GU_PSM_T16;
 
       displayBuffer = SCEGU_VRAM_BP_1;
@@ -282,7 +286,8 @@ static bool psp_frame(void *data, const void *frame,
    if (!width || !height)
       return false;
 
-   sceGuSync(0, 0);
+   if (!(((uint32_t)frame&0x04000000) || (frame == RETRO_HW_FRAME_BUFFER_VALID))) // let the core decide when to sync when HW_RENDER
+      sceGuSync(0, 0);
 
    pspDebugScreenSetBase(psp->draw_buffer);
 
@@ -336,7 +341,7 @@ static bool psp_frame(void *data, const void *frame,
 
    sceGuStart(GU_DIRECT, psp->main_dList);
 
-   if ((uint32_t)frame&0x04000000) // frame in VRAM ? texture/palette was set in core so draw directly
+   if (((uint32_t)frame&0x04000000) || (frame == RETRO_HW_FRAME_BUFFER_VALID)) // frame in VRAM ? texture/palette was set in core so draw directly
    {
       sceGuClear(GU_COLOR_BUFFER_BIT);
       sceGuDrawArray(GU_SPRITES, GU_TEXTURE_16BIT | GU_COLOR_4444 | GU_VERTEX_16BIT | GU_TRANSFORM_2D, 2, NULL, (void*)(psp->frame_coords));
