@@ -198,7 +198,7 @@ bool main_load_content(int argc, char **argv, args_type() args,
       goto error;
    }
 
-   rarch_main_command(RARCH_CMD_RESUME);
+//   rarch_main_command(RARCH_CMD_RESUME);
 
    if (process_args)
       process_args(rarch_argc_ptr, rarch_argv_ptr);

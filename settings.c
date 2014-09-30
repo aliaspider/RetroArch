@@ -878,12 +878,12 @@ bool config_load_file(const char *path, bool set_defaults)
       extra_path = strtok_r(NULL, ";", &save);
    }
 
-   if (g_extern.verbosity)
-   {
-      RARCH_LOG_OUTPUT("=== Config ===\n");
-      config_file_dump_all(conf);
-      RARCH_LOG_OUTPUT("=== Config end ===\n");
-   }
+//   if (g_extern.verbosity)
+//   {
+//      RARCH_LOG_OUTPUT("=== Config ===\n");
+//      config_file_dump_all(conf);
+//      RARCH_LOG_OUTPUT("=== Config end ===\n");
+//   }
 
    char tmp_str[PATH_MAX];
 

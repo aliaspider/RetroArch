@@ -95,22 +95,23 @@ static void *psp_audio_init(const char *device,
       ("audioMainLoop", audioMainLoop, 0x08, 0x10000, 0, NULL);
    psp->nonblocking = false;
 
-   psp->running     = true;
-   sceKernelStartThread(psp->thread, sizeof(psp1_audio_t*), &psp);
+//   psp->running     = true;
+//   sceKernelStartThread(psp->thread, sizeof(psp1_audio_t*), &psp);
 
    return psp;
 }
-
+static bool psp_audio_start(void *data);
 static void psp_audio_free(void *data)
 {
    psp1_audio_t* psp = (psp1_audio_t*)data;
    if(!psp)
       return;
 
+//   psp_audio_start(data);
    psp->running = false;
    SceUInt timeout = 100000;
    sceKernelWaitThreadEnd(psp->thread, &timeout);
-   sceKernelDeleteThread(psp->thread);
+//   sceKernelTerminateDeleteThread(psp->thread);
 
    free(psp->buffer);
    free(psp->zeroBuffer);

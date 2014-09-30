@@ -406,7 +406,11 @@ static bool psp_frame(void *data, const void *frame,
 #endif
 
    if (!width || !height)
-      return false;
+   {
+      width=1;
+      height=1;
+//      return true;
+   }
 
    if (((uint32_t)frame&0x04000000) || (frame == RETRO_HW_FRAME_BUFFER_VALID))
       psp->hw_render = true;
