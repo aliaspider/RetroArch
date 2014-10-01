@@ -242,6 +242,10 @@ returntype main_entry(signature())
       rarch_playlist_push(g_extern.history, g_extern.fullpath);
 #endif
 
+   g_extern.frame_cache.width = 1;
+   g_extern.frame_cache.height = 1;
+   g_extern.frame_cache.pitch = 1;
+   g_extern.frame_cache.data = &g_extern.frame_cache.data;
 #if defined(HAVE_MAIN_LOOP)
    while (!main_entry_decide(signature_expand(), args));
 
