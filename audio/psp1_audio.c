@@ -181,7 +181,7 @@ static bool psp_audio_start(void *data)
             psp->thread, &runStatus) < 0) /* Error */
       return false;
    if (runStatus.status != PSP_THREAD_STOPPED)
-      return false;
+      return true;
 
    psp->running = true;
 
