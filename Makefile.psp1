@@ -2,7 +2,7 @@ BUILD_PRX          = 1
 DEBUG              = 0
 HAVE_KERNEL_PRX    = 1
 HAVE_FILE_LOGGER   = 0
-HAVE_THREADS       = 1
+HAVE_THREADS       = 0
 BIG_STACK          = 0
 WHOLE_ARCHIVE_LINK = 0
 
@@ -11,7 +11,7 @@ TARGET = retroarchpsp
 ifeq ($(DEBUG), 1)
    OPTIMIZE_LV	:= -O0 -g
 else
-   OPTIMIZE_LV	:= -O2 -g
+   OPTIMIZE_LV	:= -O3 -g
 endif
 
 ifeq ($(WHOLE_ARCHIVE_LINK), 1)
@@ -57,3 +57,6 @@ OBJS = $(PSP_OBJECTS)
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
+
+
+.PHONY: $(TARGET).elf

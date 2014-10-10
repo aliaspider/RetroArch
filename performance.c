@@ -50,6 +50,7 @@
 
 #if defined(__mips__)
 #include <sys/time.h>
+#include <psprtc.h>
 #endif
 
 #if defined(__PSL1GHT__)
@@ -171,9 +172,10 @@ retro_perf_tick_t rarch_get_perf_counter(void)
 #elif defined(__CELLOS_LV2__) || defined(GEKKO) || defined(_XBOX360) || defined(__powerpc__) || defined(__ppc__) || defined(__POWERPC__)
    time = __mftb();
 #elif defined(__mips__)
-   struct timeval tv;
-   gettimeofday(&tv,NULL);
-   time = (1000000 * tv.tv_sec + tv.tv_usec);
+   sceRtcGetCurrentTick(&time);
+//   struct timeval tv;
+//   gettimeofday(&tv,NULL);
+//   time = (1000000 * tv.tv_sec + tv.tv_usec);
 #elif defined(_WIN32)
    long tv_sec, tv_usec;
    static const unsigned __int64 epoch = 11644473600000000Ui64;
