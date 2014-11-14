@@ -861,12 +861,12 @@ static bool config_load_file(const char *path, bool set_defaults)
       extra_path = strtok_r(NULL, ";", &save);
    }
 
-   if (g_extern.verbosity)
-   {
-      RARCH_LOG_OUTPUT("=== Config ===\n");
-      config_file_dump_all(conf);
-      RARCH_LOG_OUTPUT("=== Config end ===\n");
-   }
+//   if (g_extern.verbosity)
+//   {
+//      RARCH_LOG_OUTPUT("=== Config ===\n");
+//      config_file_dump_all(conf);
+//      RARCH_LOG_OUTPUT("=== Config end ===\n");
+//   }
 
 
    CONFIG_GET_FLOAT(video.scale, "video_scale");
@@ -1038,13 +1038,13 @@ static bool config_load_file(const char *path, bool set_defaults)
       CONFIG_GET_PATH(libretro_directory, "libretro_directory");
 
    /* Safe-guard against older behavior. */
-   if (path_is_directory(g_settings.libretro))
-   {
-      RARCH_WARN("\"libretro_path\" is a directory, using this for \"libretro_directory\" instead.\n");
-      strlcpy(g_settings.libretro_directory, g_settings.libretro,
-            sizeof(g_settings.libretro_directory));
-      *g_settings.libretro = '\0';
-   }
+//   if (path_is_directory(g_settings.libretro))
+//   {
+//      RARCH_WARN("\"libretro_path\" is a directory, using this for \"libretro_directory\" instead.\n");
+//      strlcpy(g_settings.libretro_directory, g_settings.libretro,
+//            sizeof(g_settings.libretro_directory));
+//      *g_settings.libretro = '\0';
+//   }
 
    CONFIG_GET_BOOL(fps_show, "fps_show");
    CONFIG_GET_BOOL(load_dummy_on_core_shutdown, "load_dummy_on_core_shutdown");
